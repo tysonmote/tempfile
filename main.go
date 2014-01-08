@@ -17,9 +17,10 @@ func nextIndex() (i int) {
 	return i
 }
 
-// Path returns the absolute path to a temporary file that
-// doesn't exist yet.
-func Path() string {
+// NewPath returns the absolute path to a temporary file that doesn't exist
+// yet. If it generates a path that already exists, it tries to remove the
+// path.
+func NewPath() string {
 	name := fmt.Sprintf("%d_%d", os.Getpid(), nextIndex())
 	path := filepath.Join(tempDir, name)
 	os.Remove(path)
